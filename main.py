@@ -1,4 +1,25 @@
 import tkinter 
+from tkinter import messagebox
+
+def survey_data(): 
+    username = user_name_input.get()
+    email = user_email_input.get()
+    if username and email: 
+        question1 = question_1_input.get("1.0", "end")
+        question2 = question_2_input.get("1.0", "end")
+        question3 = question_3_input.get("1.0", "end")
+        starrating = rating_label.cget("text")
+
+        print("User name: ", username, "Email: ", email)
+        print("Question 1: ", question1)
+        print("Question 2: ", question2)
+        print("Question 3: ", question3)
+        print("Rating: ", starrating)
+        print("-------------------------------------------")
+    else: 
+        tkinter.messagebox.showwarning(title="Error", message="User name and email are required")   
+
+
 
 def set_rating(rating):
     for i in range(1,6):
@@ -72,11 +93,11 @@ for widget in survey_questions_frame.winfo_children():
 
 
 Rating_label = tkinter.Label(window, text="Please rate your experience from 1-5.")
-Rating_label.pack( pady=5)
+Rating_label.pack()
 
 star_frame = tkinter.Frame(window)
 
-star_frame.pack( )
+star_frame.pack()
 
 star_buttons =[]
 for i in range(1,6):
@@ -87,6 +108,12 @@ for i in range(1,6):
 rating_label= tkinter.Label(star_frame, text="Rating:0/5")
 rating_label.pack(pady=30)   
 
+
+button_frame= tkinter.Frame(window)
+button_frame.pack()
+
+button = tkinter.Button(button_frame, text="Submit", command= survey_data)
+button.pack(pady=10 )
 
 
 window.mainloop()
