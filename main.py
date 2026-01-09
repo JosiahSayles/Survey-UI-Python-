@@ -1,7 +1,12 @@
 import tkinter 
 
-
-
+def set_rating(rating):
+    for i in range(1,6):
+        if i <= rating: 
+            star_buttons[i-1].config(text="★", fg="#FFD700")
+        else: 
+            star_buttons[i-1].config(text="☆", fg="black")   
+    rating_label.config(text=f"Rating: {rating}/5") 
 
 window = tkinter.Tk()
 window.title("Survey form")
@@ -36,6 +41,7 @@ user_email_input.grid(row=1, column=1)
 user_phone_number_input.grid(row=1, column=2)
 user_zipcode_input.grid(row=1,column=3)
 
+
 for widget in survey_user_info_frame.winfo_children():
     widget.grid_configure(padx=10, pady=10)
 
@@ -60,10 +66,27 @@ question_3_label.grid(row=4, column=0)
 question_3_input = tkinter.Text(survey_questions_frame, height=5, width=30, bd=2)
 question_3_input.grid(row=5, column=0, sticky="news") 
 
-question_4_label = tkinter.Label(survey_questions_frame, text="Question 4. On a Scale of 1 to 5 how would you rate your overall service? ")
-question_4_label.grid(row=6, column=0)
-# question_4_star_rating 
+
 for widget in survey_questions_frame.winfo_children():
     widget.grid_configure(padx=20, pady=10)
+
+
+Rating_label = tkinter.Label(window, text="Please rate your experience from 1-5.")
+Rating_label.pack( pady=5)
+
+star_frame = tkinter.Frame(window)
+
+star_frame.pack( )
+
+star_buttons =[]
+for i in range(1,6):
+    btn = tkinter.Button(star_frame, text="☆", fg="black", cursor="hand2",  command=lambda r=i: set_rating(r))
+    btn.pack(side="left")
+    star_buttons.append(btn)
+
+rating_label= tkinter.Label(star_frame, text="Rating:0/5")
+rating_label.pack(pady=30)   
+
+
 
 window.mainloop()
